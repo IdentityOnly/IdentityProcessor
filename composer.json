@@ -1,0 +1,21 @@
+{
+    "name": "identityonly/identity-processor",
+    "description": "Message processor for IdentityOnly",
+    "authors": [
+        {
+            "name": "Justin Martin",
+            "email": "frozenfire@thefrozenfire.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.identityonly.com"
+        }
+    ],
+    "type": "zend-module",
+    "require": {
+        "composer/installers": "~1.0",
+        "hellogerard/jobby": "v2.0.2"
+    }
+}
