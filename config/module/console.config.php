@@ -2,12 +2,13 @@
 return array(
     'router' => array(
         'routes' => array(
-            'processor-process' => array(
+            'process' => array(
                 'options' => array(
-                    'route' => 'processor-process',
+                    'route' => 'process [cron|received-emails]:job',
                     'defaults' => array(
                         'controller' => 'IdentityProcessor\Controller\Processor',
                         'action' => 'process',
+                        'job' => 'cron'
                     )
                 )
             )
