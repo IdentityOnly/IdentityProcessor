@@ -54,6 +54,7 @@ class GitHub extends AbstractProcessor
     }
     
     protected function detectMessageType($mailMessage) {
+        $body = $mailMessage->getBody();
         if($body instanceof Mime\Message) {
             foreach($body->getParts() as $part) {
                 if(stripos($part->getContent(), self::REGISTRATION_MESSAGE) !== false) {
@@ -64,11 +65,11 @@ class GitHub extends AbstractProcessor
             return ProcessedMessage::TYPE_REGISTRATION;
         }
         
-        if(stripos($mailMessage->getHeaders()->get('Subject'), self::RESET_MESSAGE) !== false) {
+        if(stripos($mailMessage->getHeaders()->get('Subject')->getFieldValue(), self::RESET_MESSAGE) !== false) {
             return ProcessedMessage::TYPE_RESET;
         }
         
-        if(stripos($mailMessage->getHeaders()->get('Subject'), self::DELETION_MESSAGE) !== false) {
+        if(stripos($mailMessage->getHeaders()->get('Subject')->getFieldValue(), self::DELETION_MESSAGE) !== false) {
             return ProcessedMessage::TYPE_DELETION;
         }
     }
