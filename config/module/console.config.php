@@ -4,14 +4,16 @@ return array(
         'routes' => array(
             'process' => array(
                 'options' => array(
-                    'route' => 'process [cron|received-emails]:job',
+                    'route' => 'process [--verbose] [--dry-run] [cron|received-emails]:job',
                     'defaults' => array(
                         'controller' => 'IdentityProcessor\Controller\Processor',
                         'action' => 'process',
-                        'job' => 'cron'
+                        'job' => 'cron',
+                        'verbose' => false,
+                        'dry-run' => false,
                     )
                 )
-            )
+            ),
         )
     )
 );

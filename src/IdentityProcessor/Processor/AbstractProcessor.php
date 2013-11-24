@@ -19,7 +19,7 @@ abstract class AbstractProcessor implements ServiceLocatorAwareInterface
      * @param ReceivedMessage $message
      * @return ProcessedMessage
      */
-    public function process(ReceivedMessage $message);
+    abstract public function process(ReceivedMessage $message);
     
     public function getProcessedMessage() {
         if(!$this->processedMessage) {

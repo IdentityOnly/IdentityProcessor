@@ -17,6 +17,19 @@ class Processor extends AbstractController
     
     public function processReceivedEmailsAction()
     {
+        $messageService = $this->getServiceLocator()->get('IdentityCommon\Service\Message');
+        $processReceivedEmails = $this->getServiceLocator()->get('IdentityProcessor\CQRS\ProcessReceivedEmails');
         
+        $messages = $messageService->findUnprocessedReceivedMessages();
+        $processReceivedEmails->setMessages($messages);
+        $processReceivedEmails->setPersistChanges(!$this->params('dry-run'));
+        
+        $processedMessages = $processReceivedEmails->execute();
+        if($this->params('verbose')) {
+            foreach($processedMessages as $message) {
+                echo "[{$message->getId()}] {$message->getType()}".PHP_EOL;
+                echo "\tLink: {$message->getLink()}";
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ class GitHub extends AbstractProcessor
 
     public function process(ReceivedMessage $message) {
         $processed = $this->getProcessedMessage();
+        $processed->setReceivedMessage($message);
         $mailMessage = $message->getMessage();
         
         if(!($messageType = $this->detectMessageType($mailMessage))) {
@@ -68,7 +69,7 @@ class GitHub extends AbstractProcessor
         }
         
         if(stripos($mailMessage->getHeaders()->get('Subject'), self::DELETION_MESSAGE) !== false) {
-            return ProcessedMessage:TYPE_DELETION;
+            return ProcessedMessage::TYPE_DELETION;
         }
     }
     

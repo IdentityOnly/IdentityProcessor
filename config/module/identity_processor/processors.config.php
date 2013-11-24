@@ -1,4 +1,11 @@
 <?php
 return array(
-    'GitHub' => 'IdentityProcessor\Processor\GitHub',
+    'GitHub' => array(
+        'name' => 'GitHub',
+        'type' => 'IdentityProcessor\Processor\GitHub',
+        'email_addresses' => array(
+            'support@github.com',
+            'noreply@github.com',
+        ),
+    ),
 );
