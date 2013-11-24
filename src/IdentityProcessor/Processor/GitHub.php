@@ -13,10 +13,10 @@ class GitHub extends AbstractProcessor
     const RESET_MESSAGE = 'reset your password';
     const DELETION_MESSAGE = 'Account deletion';
     
-    const RESET_REGEX = '/Use the following link within the next 24 hours to reset your password:\n\n(.*)\n\n/iU';
+    const RESET_REGEX = '/Use the following link within the next 24 hours to reset your password:\s+((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[.\!\/\\w]*))?)\s+/iU';
 
     public function process(ReceivedMessage $message) {
-        $processed = $this->getProcessedMessage();
+        $processed = clone $this->getProcessedMessage();
         $processed->setReceivedMessage($message);
         $mailMessage = $message->getMessage();
         
@@ -45,7 +45,7 @@ class GitHub extends AbstractProcessor
             }
             return false;
         } elseif(is_string($body)) {
-            if(!$this->processTextMessage($processed, $body)) {
+            if(!$this->processTextMessage($processed, $messageType, $body)) {
                 return false;
             }
         }

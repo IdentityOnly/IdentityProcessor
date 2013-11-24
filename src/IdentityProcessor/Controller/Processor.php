@@ -28,7 +28,7 @@ class Processor extends AbstractController
         if($this->params('verbose')) {
             foreach($processedMessages as $message) {
                 echo "[{$message->getId()}] {$message->getType()}".PHP_EOL;
-                echo "\tLink: {$message->getLink()}";
+                echo "\tLink: {$message->getLink()}".PHP_EOL;
             }
         }
     }
